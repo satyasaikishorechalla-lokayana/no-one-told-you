@@ -1,0 +1,22 @@
+{
+  "name": "Mera Adhikar - मेरा अधिकार",
+  "short_name": "Mera Adhikar",
+  "description": "Know your rights as an Indian citizen. Laws in simple language with real examples.",
+  "start_url": "/mera-adhikar/",
+  "scope": "/mera-adhikar/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0D0D0D",
+  "theme_color": "#FF6B35",
+  "lang": "en-IN",
+  "categories": ["education", "legal", "government"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    { "name": "Emergency Helplines", "url": "/mera-adhikar/#helplines", "description": "View all emergency helplines" },
+    { "name": "Police & FIR Rights", "url": "/mera-adhikar/#police", "description": "Know your police rights" }
+  ]
+}
