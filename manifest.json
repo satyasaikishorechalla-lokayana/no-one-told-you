@@ -1,22 +1,45 @@
 {
   "name": "Mera Adhikar - मेरा अधिकार",
   "short_name": "Mera Adhikar",
-  "description": "Know your rights as an Indian citizen. Laws in simple language with real examples.",
-  "start_url": "/mera-adhikar/",
+  "description": "Know your legal rights as an Indian citizen. 24 laws explained in simple language with real life examples, emergency helplines and step-by-step guidance.",
+  "start_url": "/mera-adhikar/index.html",
   "scope": "/mera-adhikar/",
   "display": "standalone",
-  "orientation": "portrait",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
   "background_color": "#0D0D0D",
   "theme_color": "#FF6B35",
   "lang": "en-IN",
-  "categories": ["education", "legal", "government"],
+  "dir": "ltr",
+  "categories": ["education", "legal", "government", "utilities"],
+  "prefer_related_applications": false,
   "icons": [
-    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-48.png",  "sizes": "48x48",   "type": "image/png", "purpose": "any" },
+    { "src": "icon-72.png",  "sizes": "72x72",   "type": "image/png", "purpose": "any" },
+    { "src": "icon-96.png",  "sizes": "96x96",   "type": "image/png", "purpose": "any" },
+    { "src": "icon-128.png", "sizes": "128x128", "type": "image/png", "purpose": "any" },
+    { "src": "icon-144.png", "sizes": "144x144", "type": "image/png", "purpose": "any" },
+    { "src": "icon-152.png", "sizes": "152x152", "type": "image/png", "purpose": "any" },
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-256.png", "sizes": "256x256", "type": "image/png", "purpose": "any" },
     { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ],
-  "screenshots": [],
+  "screenshots": [
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "platform": "narrow", "label": "Home Screen" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "platform": "narrow", "label": "Emergency Helplines" }
+  ],
   "shortcuts": [
-    { "name": "Emergency Helplines", "url": "/mera-adhikar/#helplines", "description": "View all emergency helplines" },
-    { "name": "Police & FIR Rights", "url": "/mera-adhikar/#police", "description": "Know your police rights" }
-  ]
+    { "name": "Emergency Helplines", "short_name": "Helplines", "url": "/mera-adhikar/index.html", "icons": [{ "src": "icon-96.png", "sizes": "96x96" }] },
+    { "name": "Police & FIR Rights", "short_name": "Police Rights", "url": "/mera-adhikar/index.html", "icons": [{ "src": "icon-96.png", "sizes": "96x96" }] },
+    { "name": "Family Rights", "short_name": "Family", "url": "/mera-adhikar/index.html", "icons": [{ "src": "icon-96.png", "sizes": "96x96" }] },
+    { "name": "Did You Know Quiz", "short_name": "Quiz", "url": "/mera-adhikar/index.html", "icons": [{ "src": "icon-96.png", "sizes": "96x96" }] }
+  ],
+  "share_target": {
+    "action": "/mera-adhikar/",
+    "method": "GET",
+    "params": { "title": "title", "text": "text", "url": "url" }
+  },
+  "handle_links": "preferred",
+  "launch_handler": { "client_mode": "focus-existing" },
+  "edge_side_panel": { "preferred_width": 430 }
 }
