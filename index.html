@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="theme-color" content="#0D0D0D"/>
+<meta name="description" content="Mera Adhikar - Know your rights as an Indian citizen. Laws explained in simple language with real examples."/>
+<title>Mera Adhikar 🇮🇳 - मेरा अधिकार</title>
+<link rel="manifest" href="#"/>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{font-family:'Nunito',sans-serif;background:#0D0D0D;color:#F0F0F0;max-width:430px;margin:0 auto;min-height:100vh;overflow-x:hidden;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-thumb{background:#FF6B35;border-radius:4px;}
+.tap{transition:transform .15s,opacity .15s;cursor:pointer;}
+.tap:active{transform:scale(.96);opacity:.85;}
+.card{transition:transform .2s,box-shadow .2s;cursor:pointer;}
+.card:active{transform:scale(.97);}
+input:focus{outline:none;}
+input::placeholder{color:rgba(255,255,255,.35);}
+.slide-up{animation:su .35s cubic-bezier(.22,1,.36,1) both;}
+@keyframes su{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+.fade{animation:fd .3s ease both;}
+@keyframes fd{from{opacity:0;}to{opacity:1;}}
+.ping{animation:pg 1.8s ease-in-out infinite;}
+@keyframes pg{0%,100%{opacity:1;}50%{opacity:.4;}}
+.chip{transition:all .2s;cursor:pointer;white-space:nowrap;}
+.chip:active{transform:scale(.94);}
+.hidden{display:none!important;}
+.screen{padding-bottom:90px;}
+/* Bottom Nav */
+#bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:60;background:rgba(13,13,13,.97);backdrop-filter:blur(16px);border-top:1px solid rgba(255,255,255,.08);display:flex;padding:8px 0 10px;}
+.nav-item{flex:1;text-align:center;cursor:pointer;padding:2px 0;}
+.nav-icon{font-size:22px;line-height:1;}
+.nav-label{font-size:10px;font-weight:800;margin-top:3px;}
+.nav-dot{width:20px;height:3px;background:#FF6B35;border-radius:2px;margin:4px auto 0;}
+/* Emergency bar */
+#emergency-bar{position:fixed;bottom:62px;left:50%;transform:translateX(-50%);z-index:59;background:linear-gradient(90deg,#EF4444,#FF6B35);border-radius:12px;padding:8px 16px;display:flex;align-items:center;gap:8px;box-shadow:0 4px 20px rgba(239,68,68,.4);cursor:pointer;}
+/* Sticky appbar */
+#appbar{position:sticky;top:0;z-index:50;background:rgba(13,13,13,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.07);padding:14px 16px 12px;}
+/* Category scroll */
+#cat-scroll{overflow-x:auto;padding:12px 16px 0;display:flex;gap:8px;scrollbar-width:none;}
+#cat-scroll::-webkit-scrollbar{display:none;}
+/* Search */
+#search-wrap{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.07);border-radius:12px;padding:10px 14px;border:1px solid rgba(255,255,255,.1);}
+#search-input{flex:1;background:none;border:none;color:#fff;font-size:14px;font-weight:600;font-family:'Nunito',sans-serif;}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     DATA
+════════════════════════════════════════════════ -->
+<script>
+const CATEGORIES=[
+  {id:"all",label:"All Topics",icon:"🏠",color:"#FF6B35"},
+  {id:"rights",label:"Fundamental Rights",icon:"⚖️",color:"#6C63FF"},
+  {id:"family",label:"Family & Marriage",icon:"👨‍👩‍👧",color:"#FF4C8B"},
+  {id:"land",label:"Land & Property",icon:"🏗️",color:"#F59E0B"},
+  {id:"police",label:"Police & FIR",icon:"👮",color:"#EF4444"},
+  {id:"realestate",label:"Real Estate/RERA",icon:"🏢",color:"#10B981"},
+  {id:"ecommerce",label:"E-Commerce",icon:"📦",color:"#3B82F6"},
+  {id:"food",label:"Food Safety",icon:"🍽️",color:"#84CC16"},
+  {id:"women",label:"Women's Rights",icon:"👩",color:"#EC4899"},
+  {id:"labour",label:"Labour & Jobs",icon:"👷",color:"#F97316"},
+  {id:"consumer",label:"Consumer Rights",icon:"🛒",color:"#06B6D4"},
+  {id:"cyber",label:"Cyber & Digital",icon:"💻",color:"#8B5CF6"},
+  {id:"rti",label:"RTI & Govt",icon:"📋",color:"#14B8A6"},
+  {id:"senior",label:"Senior Citizens",icon:"👴",color:"#A78BFA"},
+];
+
+const ALL_LAWS=[
+  {id:1,cat:"rights",icon:"⚖️",color:"#6C63FF",title:"Right to Equality",article:"Article 14–18",badge:"Constitution",
+   summary:"No discrimination based on caste, religion, gender or place of birth. Every citizen is equal before law.",
+   scenario:{tag:"🏫 School Caste Discrimination",
+     story:"Lakshmi (10 yrs) from a Dalit family was made to sit separately in a Rajasthan government school and denied mid-day meal.",
+     law:"This violates Article 15 + SC/ST Prevention of Atrocities Act 1989. School principal can be jailed up to 6 months.",
+     steps:["Call 14566 – National SC/ST Helpline (FREE)","File complaint at District Collector office same day","Contact National Commission for SC at 011-24651544","Approach High Court for writ if no action in 7 days"],
+     outcome:"Supreme Court verdict: Separate seating = Untouchability = Criminal offence"},
+   keyFacts:["Untouchability is a criminal offence (Article 17)","No discrimination in government jobs, schools, public places","Equal pay for equal work is a right","Reservation for SC/ST/OBC is constitutionally valid"]},
+
+  {id:2,cat:"rights",icon:"🗣️",color:"#6C63FF",title:"Arrested? Know Your Rights",article:"Article 22 + BNS 2023",badge:"Critical",
+   summary:"Police MUST follow strict rules before and after arrest. Violating these rules makes the arrest illegal.",
+   scenario:{tag:"🚔 Midnight Arrest Without Reason",
+     story:"Suresh (42, a farmer from UP) was picked up at 11 PM. Police didn't say why. Kept him 48 hours without producing him before magistrate.",
+     law:"Article 22 + Section 58 BNSS: Police must (1) tell reason of arrest, (2) allow lawyer access, (3) produce before magistrate within 24 hours. Violation = Habeas Corpus grounds.",
+     steps:["Demand WRITTEN arrest memo at time of arrest","Immediately inform family or lawyer — it is your RIGHT","If no production in 24 hours, family can file Habeas Corpus in High Court","File complaint against police at SP office or Human Rights Commission","Call: Legal Aid 15100 (FREE)"],
+     outcome:"Courts have awarded compensation up to ₹5 lakhs for illegal detention"},
+   keyFacts:["You CANNOT be held more than 24 hours without magistrate order","You have the RIGHT to remain silent","Police CANNOT torture — it is a crime (Section 331 BNS)","Female suspects can only be arrested by female police, NOT before sunrise"]},
+
+  {id:3,cat:"family",icon:"👰",color:"#FF4C8B",title:"Dowry Harassment & Domestic Violence",article:"IPC 498A + PWDVA 2005",badge:"Most Common",
+   summary:"Demanding dowry is a crime. Domestic violence (physical, emotional, financial) is punishable. Wife can claim residence rights.",
+   scenario:{tag:"🏠 Husband's Family Demanding Gold",
+     story:"Preethi married in 2022. In-laws constantly demanded ₹5 lakh more. Husband beats her. She was thrown out of the house with her 2-year-old child.",
+     law:"498A IPC: Dowry harassment → up to 3 years jail. PWDVA 2005: She has RIGHT to stay in shared household. Court can issue Protection Order within 3 days.",
+     steps:["Call Women Helpline: 181 (FREE, 24/7)","Go to nearest Magistrate's court — file DV Act application","Contact District Protection Officer (DPO) — free help","File FIR at police station under Section 498A","Claim maintenance under Section 125 CrPC"],
+     outcome:"Court can order husband to pay ₹10,000-50,000/month maintenance within 60 days"},
+   keyFacts:["Demanding OR giving dowry = crime (both sides punishable)","Wife has right to live in matrimonial home even if it's in-laws' name","Children's custody: courts prioritize child's welfare, not father automatically","Emotional and financial abuse = domestic violence under law"]},
+
+  {id:4,cat:"family",icon:"📜",color:"#FF4C8B",title:"Property Rights After Father's Death",article:"Hindu Succession Act 1956 (Amended 2005)",badge:"Very Important",
+   summary:"Daughters have EQUAL rights in ancestral property as sons — even if born before 2005. This is a Supreme Court ruling.",
+   scenario:{tag:"🏡 Brothers Denying Sister Her Share",
+     story:"After their father died without a will in Tamil Nadu, Kavitha's 3 brothers registered all land only in their names, saying 'daughters don't get ancestral property.'",
+     law:"Supreme Court (Vineeta Sharma case 2020): Daughters have EQUAL share in ancestral property regardless of when born or whether father was alive in 2005.",
+     steps:["Get certified copy of land records from Sub-Registrar office","Send legal notice to brothers through a lawyer","File Partition Suit in Civil Court","Apply for interim injunction to stop sale of property","Call Legal Aid: 15100 if cannot afford lawyer"],
+     outcome:"Kavitha won equal 1/4th share. Brothers had to pay court costs too."},
+   keyFacts:["Daughter = Son in ancestral property (2005 amendment)","Self-acquired property: father can give to anyone via Will","No Will = equal share among all legal heirs","Widow has right to husband's property + her own stridhan"]},
+
+  {id:5,cat:"family",icon:"💔",color:"#FF4C8B",title:"Divorce & Maintenance Rights",article:"HMA 1955 / Muslim Personal Law",badge:"Guide",
+   summary:"Any spouse can file for divorce. Wife can claim maintenance during and after divorce. Child support is mandatory.",
+   scenario:{tag:"👶 Abandoned Wife With Children",
+     story:"Nandita's husband left for Dubai 3 years ago and stopped sending money. She has 2 kids. He refuses to divorce or support them.",
+     law:"Section 125 CrPC: Court can order husband to pay maintenance even without divorce. Interim maintenance can be ordered within 60 days.",
+     steps:["File Section 125 petition in Family Court immediately (no lawyer needed)","Apply for interim maintenance — court decides in 60 days","If husband abroad: contact Indian Embassy to locate him","File for divorce on grounds of desertion (2+ years = valid ground)","Contact One Stop Centre (Sakhi): 181"],
+     outcome:"Courts typically award ₹8,000–25,000/month depending on husband's income"},
+   keyFacts:["Mutual consent divorce: 6 months (can be waived by court)","Contested divorce: 1-3 years typically","Wife can claim share in husband's property acquired during marriage","Alimony can continue for life if wife unable to support herself"]},
+
+  {id:6,cat:"land",icon:"📐",color:"#F59E0B",title:"Land Encroachment & Illegal Possession",article:"BNS Section 329 + Civil Law",badge:"Urgent",
+   summary:"If someone illegally occupies your land, you must act within 12 years or lose right to reclaim it.",
+   scenario:{tag:"🚜 Neighbour Illegally Builds on Your Plot",
+     story:"Ramu owns a vacant plot in Hyderabad. His neighbour started constructing a boundary wall on 2 feet of Ramu's registered land without permission.",
+     law:"Criminal trespass under BNS Section 329 (up to 3 months jail). Civil suit for injunction to stop construction immediately.",
+     steps:["Take photos/videos as evidence immediately","File complaint with local police (Section 329 BNS)","Apply for Temporary Injunction in Civil Court (within 48 hours if urgent)","Approach GHMC/Municipal office about illegal construction","Check Dharani portal (Telangana) for your land records online"],
+     outcome:"Injunction can stop construction within 24-48 hours of court order"},
+   keyFacts:["Keep all land documents: sale deed, Patta, mutation record, tax receipts","Encroachment for 12 years without challenge = encroacher may claim ownership","Police CANNOT interfere in civil land disputes — only civil court can decide ownership"]},
+
+  {id:7,cat:"land",icon:"📁",color:"#F59E0B",title:"Fraudulent Land Registration",article:"BNS Sections 316-318 (Forgery)",badge:"Rising Crime",
+   summary:"Land fraud is rising in India. Fraudsters use fake documents to register your property in their name.",
+   scenario:{tag:"🔏 Your Land Registered in Stranger's Name",
+     story:"Venkat discovered that his agricultural land in Andhra Pradesh was registered in someone else's name using forged documents while he was working in Mumbai.",
+     law:"Forgery under BNS 316-318: up to 7 years jail. You can file FIR + approach Sub-Registrar to cancel fraudulent registration.",
+     steps:["Download Mee Seva / Bhoomi / Bhulekh records immediately","File FIR at police station under BNS 316 (forgery) + 318 (cheating)","Approach Sub-Registrar with original documents to cancel fraud registration","File Declaration Suit in Civil Court","Approach Economic Offences Wing (EOW) if large scale fraud"],
+     outcome:"Fraudulent registration can be cancelled by civil court; criminals face 7 years jail"},
+   keyFacts:["Check your land records online every 6 months","State portals: Dharani (TS), Bhoomi (KA), MahaBhulekh (MH), Bhulekh (UP)","Registered sale deed alone doesn't guarantee title — mutation also needed"]},
+
+  {id:8,cat:"police",icon:"📝",color:"#EF4444",title:"Police Refusing to Register FIR",article:"Section 173 BNSS + Supreme Court",badge:"Know This!",
+   summary:"Police CANNOT refuse to register an FIR for a cognizable offence. It is illegal to ask you to 'settle' first.",
+   scenario:{tag:"🚪 Police Sends You Away Without FIR",
+     story:"Meena's jewellery was stolen. She went to the local police station 3 times. Each time, the SHO said 'settle it yourself' or 'small matter, go home.'",
+     law:"Lalita Kumari SC case: Registration of FIR for cognizable offence is MANDATORY. Refusing = Misconduct. Officer can be suspended.",
+     steps:["Demand FIR registration in writing (written complaint)","If refused, go DIRECTLY to DSP/SP office with written complaint","File Magistrate's complaint under Section 175 BNSS","Email complaint to State DGP (emails available on state police website)","File online FIR at your state's e-FIR portal or dial 112"],
+     outcome:"SP-level complaint usually gets FIR registered within 24 hours or officer faces departmental action"},
+   keyFacts:["FIR copy is FREE — police must give you one","You can file FIR at ANY police station in India (zero FIR)","Online FIR available in most states for certain offences","Police cannot demand bribe for FIR — file complaint against them at ACB"]},
+
+  {id:9,cat:"police",icon:"⚠️",color:"#EF4444",title:"Police Brutality & Custodial Torture",article:"Article 21 + BNS Section 331",badge:"Know Your Rights",
+   summary:"Torture in police custody is a crime. You can sue the police and get compensation from the government.",
+   scenario:{tag:"🤕 Beaten in Police Station",
+     story:"Auto driver Shiva from Chennai was picked up 'for questioning.' Police beat him badly. His family wasn't informed. He had no case against him.",
+     law:"Custodial torture violates Article 21. Section 331 BNS: Police officer can be jailed up to 10 years for custodial death/torture.",
+     steps:["Get medical examination done IMMEDIATELY after release","File complaint with State Human Rights Commission (SHRC) within 1 year","File FIR against police officer at another police station","Approach High Court with Habeas Corpus + compensation petition","Contact National Human Rights Commission: nhrc.nic.in or 14433"],
+     outcome:"Supreme Court has awarded ₹50,000–₹5 lakh compensation in custodial torture cases"},
+   keyFacts:["Magistrate MUST visit police lock-up every 15 days by law","Detainee has RIGHT to medical examination","Female detainees cannot be interrogated after sunset without female officer","CCTV in police stations is mandatory — demand footage preservation"]},
+
+  {id:10,cat:"realestate",icon:"🏢",color:"#10B981",title:"Builder Delays & RERA Complaints",article:"RERA Act 2016",badge:"Homebuyer Alert",
+   summary:"Builder must deliver flat on time or pay 10.75% interest on your money. You can get full refund if project is unregistered.",
+   scenario:{tag:"🔑 Flat Booked 4 Years Ago, Still No Possession",
+     story:"Ramesh paid ₹55 lakhs for a 3BHK in Pune in 2021. Possession was promised in 2023. The builder kept extending with excuses. No RERA number given.",
+     law:"RERA Section 18: Buyer can claim full refund + interest (~10.75%) for delay. Builder without RERA registration faces 10% of project cost as penalty.",
+     steps:["Check builder registration at maharera.mahaonline.gov.in","File RERA complaint online — costs only ₹1,000–5,000","RERA authority must decide in 60 days","If builder ignores RERA order, file Execution Application","Also file consumer complaint for mental harassment compensation"],
+     outcome:"Ramesh got full ₹55 lakh refund + ₹22 lakh interest after RERA order in 58 days"},
+   keyFacts:["Always demand RERA registration number before paying any advance","Builder cannot change apartment plan without buyer's written consent","Carpet area (not super built-up) must be used for price calculation","Maintenance charges cannot be increased arbitrarily by builder"]},
+
+  {id:11,cat:"realestate",icon:"🏘️",color:"#10B981",title:"Tenant & Landlord Disputes",article:"Rent Control Acts (State-wise)",badge:"Renter's Guide",
+   summary:"Landlords cannot evict you without notice and valid legal reason. Illegal eviction is a criminal offence.",
+   scenario:{tag:"🔒 Landlord Changes Lock Without Notice",
+     story:"Asha has lived in a rental flat in Bengaluru for 3 years. After a minor dispute, landlord changed the lock while she was away, leaving her on the street.",
+     law:"Illegal eviction = Criminal trespass (BNS 329). Landlord must go through Rent Control Court. Just 'locking out' tenant = cognizable offence.",
+     steps:["Call police immediately — it's a cognizable offence","File FIR against landlord for illegal eviction + trespass","Approach Rent Control Court for restoration of possession (same day)","Sue for damages — rent paid, hotel charges, mental harassment","Always have registered rent agreement — protects both parties"],
+     outcome:"Courts restore possession within 48-72 hours in such clear-cut cases"},
+   keyFacts:["Registered rent agreement protects tenants AND landlords","Landlord must give 15-30 days written notice before any eviction","Landlord cannot cut water/electricity to force eviction — it's illegal"]},
+
+  {id:12,cat:"ecommerce",icon:"📱",color:"#3B82F6",title:"Fake/Counterfeit Products Online",article:"Consumer Protection (E-Commerce) Rules 2020",badge:"Online Buyer Alert",
+   summary:"E-commerce platforms are LEGALLY responsible for products sold on them. You can get full refund for fake or defective products.",
+   scenario:{tag:"📦 Received Fake Branded Product Online",
+     story:"Kiran ordered a ₹8,000 'Apple charger' on Flipkart. Received a cheap Chinese fake. Flipkart rejected return saying 'delivered as described.'",
+     law:"E-Commerce Rules 2020: Platform cannot escape liability for counterfeit goods. Consumer Protection Act: Get refund + up to 10x price as compensation.",
+     steps:["Take photos/video of product with delivery box (timestamp)","Raise dispute on platform with evidence — give 48 hours","If rejected: File on consumerhelpline.gov.in (free, online)","Escalate to District Consumer Forum — no lawyer needed for cases < ₹50 lakh","Tag CCPA @jagograhakjago for fast resolution"],
+     outcome:"Platform typically refunds within 7 days once CCPA complaint is filed"},
+   keyFacts:["Return/refund policy must be clearly visible — hidden policies are invalid","Platform must display seller's name and address clearly","Paid but item not delivered = police complaint for cheating valid after 30 days","EMI cancellations must be processed within 5 working days"]},
+
+  {id:13,cat:"ecommerce",icon:"💸",color:"#3B82F6",title:"Online Shopping Fraud & Payment Scams",article:"IT Act 2000 + BNS 318",badge:"Fraud Alert",
+   summary:"Paid online but no delivery? Fake websites? These are criminal offences — report immediately.",
+   scenario:{tag:"🛍️ Fake Website Took ₹15,000 Never Delivered",
+     story:"Priya found 'myntra-offers.com' on Instagram ads offering 80% discount. Paid ₹15,000. Website disappeared. Money gone.",
+     law:"Section 318 BNS (cheating by impersonation) + IT Act 66D. Golden hour: Report to 1930 within 3 hours — bank can FREEZE the fraudster's account.",
+     steps:["Call 1930 (Cyber Crime Helpline) IMMEDIATELY — golden hour matters!","File at cybercrime.gov.in within 24 hours with payment proof","Contact your bank to initiate 'chargeback' for card payments","File FIR at nearest cybercrime police station","Report the Instagram/Facebook ad to the platform"],
+     outcome:"If reported within 3 hours, banks recovered 60-70% of fraud amounts"},
+   keyFacts:["Never pay on websites without 'https' and padlock symbol","Too-good-to-be-true discounts = red flag always","UPI payment to unknown = high risk; use credit card for better protection","RBI rule: Report within 3 days = FULL refund from bank if fraud not your fault"]},
+
+  {id:14,cat:"food",icon:"🚨",color:"#84CC16",title:"Food Adulteration & Poisoning",article:"FSSAI Act 2006 + BNS 270",badge:"Health Alert",
+   summary:"Selling adulterated food is a criminal offence. Restaurant can be fined ₹2-10 lakh. You can file complaint online.",
+   scenario:{tag:"🤢 Food Poisoning at Restaurant",
+     story:"20 people fell ill after eating biryani at a Hyderabad restaurant. Hospital confirmed food poisoning from contaminated chicken. Restaurant denied responsibility.",
+     law:"FSSAI Act Section 59: Unsafe food causing injury = jail up to 6 months + ₹5 lakh fine. Restaurant license can be cancelled.",
+     steps:["Preserve food sample in sealed bag as evidence","Collect medical reports and hospital bills","File complaint at fssai.gov.in or call 1800-112-100 (FREE)","File FIR at police station under BNS Section 270","File Consumer complaint for medical expenses + compensation"],
+     outcome:"FSSAI ordered restaurant closure + ₹3 lakh compensation in similar case 2024"},
+   keyFacts:["FSSAI license number must be displayed in every food establishment","Restaurant must provide itemised bill — no extra charges without consent","Expiry date on packaged food is MANDATORY — selling expired food = crime","Street food vendors also need FSSAI license (₹100/year basic)"]},
+
+  {id:15,cat:"food",icon:"🏷️",color:"#84CC16",title:"MRP Overcharging & Food Mislabelling",article:"Legal Metrology Act 2009 + FSSAI",badge:"Consumer Right",
+   summary:"MRP is the maximum price — no shop can charge more. Restaurants at cinema halls cannot override MRP.",
+   scenario:{tag:"🧃 Cinema Charging Above MRP",
+     story:"At a Mumbai multiplex, Arjun was charged ₹120 for a water bottle with MRP ₹20. Cinema said 'we have separate pricing.'",
+     law:"Supreme Court ruling: Cinemas CANNOT charge above MRP for packaged items. Legal Metrology Act: Overcharging = ₹25,000 fine per violation.",
+     steps:["Demand itemised bill — don't pay extra","If forced to pay: take receipt and file complaint","Complain to District Legal Metrology Officer","File consumer complaint at consumerhelpline.gov.in","Post on social media — multiplexes respond fast to viral complaints"],
+     outcome:"Supreme Court in 2023 reaffirmed: MRP is maximum, cinemas cannot override it"},
+   keyFacts:["MRP includes all taxes — no additional tax can be charged on MRP","Net weight/quantity must match label — short weight = criminal offence","Veg/Non-veg green/red dot symbol is mandatory by law","Service charge at restaurants is OPTIONAL — you can refuse to pay"]},
+
+  {id:16,cat:"women",icon:"🛡️",color:"#EC4899",title:"Workplace Sexual Harassment (POSH)",article:"POSH Act 2013",badge:"Every Woman Must Know",
+   summary:"Every company with 10+ employees must have an Internal Complaints Committee. Sexual harassment at work = criminal offence.",
+   scenario:{tag:"😰 Boss Making Inappropriate Comments",
+     story:"IT employee Divya in Bengaluru is constantly harassed by her male manager — inappropriate messages, comments about her appearance. HR is inactive.",
+     law:"POSH Act: Company must have ICC. If not = ₹50,000 fine on company. Manager can be dismissed + criminally prosecuted under BNS Section 354A.",
+     steps:["Write formal complaint to ICC within 3 months of last incident","If no ICC: Complain to District Officer (Local Complaints Committee)","If retaliated against for complaining = separate violation","File police complaint under BNS 354A simultaneously","Call: iCall Helpline 9152987821 for counselling support"],
+     outcome:"Most companies settle within ICC — manager typically dismissed, compensation ordered"},
+   keyFacts:["Even one incident is enough to file POSH complaint","Domestic workers, contractual workers also covered by POSH","Company must display POSH policy visibly — failure = penalty","Maternity leave is 26 weeks (for first 2 children) — fully paid"]},
+
+  {id:17,cat:"women",icon:"🚨",color:"#EC4899",title:"Acid Attack & Sexual Assault — Emergency Steps",article:"BNS Sections 64–68, 124",badge:"Emergency",
+   summary:"Immediate medical care is free at any government hospital. Police MUST register case. Fast-track courts exist.",
+   scenario:{tag:"⚡ Immediate Steps After Sexual Assault",
+     story:"What must a victim do in first 24-72 hours? Many survivors don't know their rights and miss crucial legal steps.",
+     law:"BNS Section 64: Rape = 10 years to life imprisonment. Medical evidence within 72 hours is critical. Police CANNOT refuse to register case.",
+     steps:["Go to government hospital IMMEDIATELY — free treatment + evidence collection","Police must record your statement AT THE HOSPITAL","A female police officer MUST be present for statement","Get FREE legal aid advocate — call 15100","One Stop Centres (Sakhi) handle everything: medical, legal, counselling — call 181"],
+     outcome:"Fast-track special courts must complete trial within 2 months"},
+   keyFacts:["Acid attack survivors get free reconstruction surgery at government hospitals","Victim's identity is legally protected — publishing name = 2 years jail","Victim's sexual history CANNOT be used against her in court","Medical examination cannot be refused at any government hospital"]},
+
+  {id:18,cat:"labour",icon:"💰",color:"#F97316",title:"Salary Not Paid / Illegal Deduction",article:"Payment of Wages Act 1936",badge:"Worker Alert",
+   summary:"Employer must pay salary by 7th or 10th of next month. Unpaid wages = criminal offence.",
+   scenario:{tag:"💸 Employer Holds 3 Months Salary",
+     story:"Factory worker Ramesh in Surat worked for 3 months. When he resigned, employer refused to pay ₹54,000 salary saying 'company is in losses.'",
+     law:"Payment of Wages Act Section 20: Employee can claim wages + 10x compensation before Labour Court. Fast-track process — no expensive lawyer needed.",
+     steps:["Collect evidence: appointment letter, salary slips, attendance records","Send legal notice to employer (keep copy)","File complaint with Assistant Labour Commissioner in your district","File claim before Labour Court — no court fee for workers","Call Shramik Helpline: 14434 (FREE)"],
+     outcome:"Labour courts typically order full payment within 3-6 months"},
+   keyFacts:["Minimum wage varies by state and industry — check your state's notification","PF deduction (12%) is mandatory for companies with 20+ employees","Notice period cannot exceed 30 days for workers earning below ₹50,000/month","ESIC (medical insurance) mandatory for employees earning below ₹21,000/month"]},
+
+  {id:19,cat:"labour",icon:"📄",color:"#F97316",title:"Wrongful Termination & Retrenchment",article:"Industrial Disputes Act + Labour Codes",badge:"Job Security",
+   summary:"Cannot be fired without proper notice + dues. Factories with 100+ workers need government permission to fire workers.",
+   scenario:{tag:"📧 Fired Over WhatsApp Message",
+     story:"Sanjay worked 5 years at a private company in Noida. One day got a WhatsApp message: 'Your services terminated from today.' No letter, no notice pay, no gratuity.",
+     law:"Company must give 30-day notice OR pay 1 month salary in lieu. After 5 years: Gratuity of ₹69,230 mandatory. Termination letter mandatory.",
+     steps:["Send written demand notice for unpaid dues","File complaint with Labour Commissioner with all documents","Approach Labour Court under Industrial Disputes Act","Claim: notice pay + gratuity + pending salary + experience letter","If company is 100+ workers: may be illegal retrenchment requiring govt permission"],
+     outcome:"Courts regularly order reinstatement OR full back-wages + gratuity for such cases"},
+   keyFacts:["Gratuity is YOUR right after 5 years of service — employer cannot refuse","Experience/relieving letter is a RIGHT — withholding it = unfair practice","Contract employees also have rights after 240 days continuous service","EPFO can be contacted directly for PF-related disputes: epfindia.gov.in"]},
+
+  {id:20,cat:"consumer",icon:"🔧",color:"#06B6D4",title:"Defective Products & Warranty Disputes",article:"Consumer Protection Act 2019",badge:"Buyer's Right",
+   summary:"Manufacturer is liable for product defects. You can claim replacement, repair, or refund.",
+   scenario:{tag:"🚗 New Car Breaks Down Day After Delivery",
+     story:"Rajesh bought a ₹12 lakh car from a Hyundai dealer in Chennai. It broke down on day 2. Dealer says 'it's user damage' and wants ₹40,000 for repair.",
+     law:"Consumer Protection Act: 'Defect' includes manufacturing defect. You're entitled to free repair, replacement, or full refund.",
+     steps:["Write formal complaint to dealer AND company headquarters with photos","Give 15 days to resolve — keep all communications in writing","File complaint at consumerhelpline.gov.in (free, online)","Approach District Consumer Commission (no lawyer needed, < ₹50 lakh)","Also contact company's Nodal Officer (listed on website)"],
+     outcome:"Consumer courts regularly order full refund + compensation for manufacturing defects"},
+   keyFacts:["Warranty card must be honoured — no condition of 'authorised service centre only' if not stated upfront","'As is' condition clause is invalid for hidden defects seller knew about","Insurance company unfair rejection = IRDAI Bima Bharosa: 155255","Bank unfair charges = RBI Banking Ombudsman: bankingombudsman.rbi.org.in"]},
+
+  {id:21,cat:"cyber",icon:"🔐",color:"#8B5CF6",title:"UPI / Banking Fraud",article:"RBI Guidelines + IT Act 2000",badge:"Urgent - Golden Hour",
+   summary:"Report bank fraud within 3 hours for best chance of recovery. RBI rules make bank FULLY liable if you report within 3 days.",
+   scenario:{tag:"📲 OTP Shared = ₹1,20,000 Gone",
+     story:"Rajani received a call from 'SBI customer care.' Caller knew her name and last 4 digits of card. She shared OTP. ₹1,20,000 debited instantly.",
+     law:"RBI Circular: If unauthorized transaction happened WITHOUT sharing credentials = bank is fully liable. Immediate reporting is crucial.",
+     steps:["IMMEDIATELY call 1930 (Cyber Crime) — every minute matters!","Call your bank's 24/7 helpline and BLOCK card + account","File complaint at cybercrime.gov.in same day","Visit bank branch with written complaint + get acknowledgement","File FIR at nearest police station under IT Act + BNS 318"],
+     outcome:"Cases reported within 3 hours: ~67% recovery rate (CERT-In data 2024)"},
+   keyFacts:["1930 = National Cyber Crime Helpline — available 24/7","Never share OTP, CVV, PIN — no real bank ever asks","SIM swap fraud: if phone suddenly has no signal, call bank immediately","Fake KYC calls are most common fraud in India in 2024-25"]},
+
+  {id:22,cat:"cyber",icon:"📸",color:"#8B5CF6",title:"Online Harassment & Morphed Images",article:"IT Act 66E, 67A + BNS 308",badge:"Privacy Right",
+   summary:"Sharing intimate images without consent is a criminal offence (3 years jail). Online harassment and cyberstalking are punishable.",
+   scenario:{tag:"😱 Ex-Partner Threatening to Share Private Photos",
+     story:"After break-up, Sneha's ex-boyfriend is threatening to share her private photos on social media unless she 'comes back.' He's also creating fake profiles in her name.",
+     law:"IT Act Section 66E: Violation of privacy = 3 years + ₹2 lakh fine. Section 67A: Publishing obscene material = 5-7 years jail.",
+     steps:["Document ALL threats — screenshots with date/time","File FIR at nearest Cyber Crime police station immediately","Report fake profiles to the platform (takes down within 24 hours usually)","Approach National Commission for Women (NCW): ncwapps.nic.in","iCall helpline: 9152987821 for psychological support"],
+     outcome:"Courts have given anticipatory bail denial + immediate arrest in such cases"},
+   keyFacts:["Cyberstalking: following someone online with intent to harm = 3 years jail","Doxxing (publishing someone's address to incite harm) = criminal offence","Trolling with caste/religion slurs = IT Act + SC/ST Atrocities Act","Screenshots are valid evidence in court (IT Act Section 65B certificate needed)"]},
+
+  {id:23,cat:"rti",icon:"📋",color:"#14B8A6",title:"How to File RTI — Step by Step",article:"RTI Act 2005",badge:"Powerful Tool",
+   summary:"RTI is the most powerful weapon against government corruption. For just ₹10, you can ask for ANY government document.",
+   scenario:{tag:"🏫 School Building Fund Missing",
+     story:"Parents in a Pune government school noticed the building was crumbling despite ₹12 lakh being sanctioned by ZP for repairs. Money seemed to have vanished.",
+     law:"RTI Act: Government must reply within 30 days. Can ask for: expenditure details, tenders, work orders, list of beneficiaries, inspection reports.",
+     steps:["Write application to PIO (Public Info Officer) of the relevant dept","Ask specific questions: 'How much was spent? When? Contractor's name?'","Pay ₹10 (BPL = FREE). Send by registered post or submit in person","If no reply in 30 days: First Appeal to First Appellate Authority (free)","If still ignored: Second Appeal/Complaint to State Information Commissioner (free)"],
+     outcome:"Parents filed RTI. ZP was forced to release construction details. Contractor blacklisted."},
+   keyFacts:["RTI works on ALL government: Centre, State, Panchayat, PSUs","PIO who delays without reason: ₹250/day fine (max ₹25,000)","File RTI online at rtionline.gov.in for central government departments","PM's office, Cabinet, CBI can all be RTI'd — no exemption for big offices"]},
+
+  {id:24,cat:"senior",icon:"👴",color:"#A78BFA",title:"Senior Citizen Protection & Maintenance",article:"Senior Citizens Act 2007",badge:"Elder Care Rights",
+   summary:"Children MUST maintain parents. Seniors can reclaim property gifted to children if neglected.",
+   scenario:{tag:"🏠 Son Evicting 75-Year-Old Mother From Her Own Home",
+     story:"Savitri Devi (75) transferred her house to her son 5 years ago. Now he and his wife physically abuse her and want to throw her out.",
+     law:"Maintenance & Welfare of Parents Act 2007: Son can be jailed for neglecting parents. Property transfer can be CANCELLED if child neglects parent.",
+     steps:["File complaint before Maintenance Tribunal (in SDM/Collector office) — free","Tribunal can order ₹10,000/month maintenance within 90 days","Also apply to cancel property transfer due to breach of moral obligation","File FIR for physical abuse (elder abuse) at police station","Helpline for seniors: 14567 (Elderline — FREE, 24/7)"],
+     outcome:"Tribunals have reversed property transfers AND ordered children to maintain parents"},
+   keyFacts:["Elderline 14567: counselling, legal help, rescue for seniors","Senior citizen queues in banks/hospitals are MANDATORY by law","Higher pension, lower income tax slabs for seniors — check entitlements","Will can be changed anytime — adult children pressuring parent = criminal coercion"]},
+];
+
+const HELPLINES=[
+  {name:"Police",num:"100",icon:"👮",color:"#EF4444",desc:"Emergency, crime, FIR"},
+  {name:"Women Helpline",num:"181",icon:"👩",color:"#EC4899",desc:"Domestic violence, assault"},
+  {name:"Child Helpline",num:"1098",icon:"🧒",color:"#F59E0B",desc:"Child abuse, missing child"},
+  {name:"Cyber Crime",num:"1930",icon:"💻",color:"#8B5CF6",desc:"Online fraud, banking fraud"},
+  {name:"Consumer Help",num:"1915",icon:"🛒",color:"#06B6D4",desc:"Product defect, e-commerce"},
+  {name:"Legal Aid",num:"15100",icon:"⚖️",color:"#6C63FF",desc:"Free lawyer, court help"},
+  {name:"Labour Helpline",num:"14434",icon:"👷",color:"#F97316",desc:"Wages, job disputes"},
+  {name:"Elderline",num:"14567",icon:"👴",color:"#A78BFA",desc:"Senior citizen distress"},
+  {name:"Ambulance",num:"108",icon:"🚑",color:"#10B981",desc:"Medical emergency"},
+  {name:"FSSAI Food",num:"1800-112-100",icon:"🍽️",color:"#84CC16",desc:"Food adulteration, poisoning"},
+  {name:"Anti-Corruption",num:"1064",icon:"🚫",color:"#F43F5E",desc:"Bribery, govt corruption"},
+  {name:"Sakhi (Women)",num:"7827170170",icon:"🌸",color:"#FB7185",desc:"One-stop centre, crisis"},
+];
+
+const DID_YOU_KNOW=[
+  {q:"Can police search your home without a warrant?",a:"Generally NO. Police need a search warrant signed by a magistrate. Exception: 'hot pursuit' and certain scheduled offences. Always ask to see the warrant.",icon:"🏠",color:"#6C63FF"},
+  {q:"Is recording a police officer legal in India?",a:"YES! You have the right to record police officers performing their public duties. This is protected free speech. Police threatening you for recording = misconduct.",icon:"📹",color:"#3B82F6"},
+  {q:"Can a bank refuse to open your account?",a:"NO (for Basic Savings Bank Account). RBI mandates any bank to open a zero-balance account for any Indian citizen with basic KYC. Refusal can be reported to RBI.",icon:"🏦",color:"#10B981"},
+  {q:"Are WhatsApp messages valid evidence in court?",a:"YES, they are valid under the Bharatiya Sakshya Adhiniyam. You need a Section 65B certificate from a court-approved expert to submit them as evidence.",icon:"💬",color:"#F59E0B"},
+  {q:"Can daughters claim father's property if he made a Will excluding them?",a:"For SELF-ACQUIRED property: Father can exclude daughters if he made a valid Will. For ANCESTRAL property: Daughters cannot be excluded — it's their birthright since 2005.",icon:"📜",color:"#EC4899"},
+  {q:"Can restaurant charge GST + service charge?",a:"GST is mandatory and goes to government. Service charge (5-10%) is OPTIONAL — you can REFUSE to pay it. Courts have ruled customers cannot be forced to pay service charge.",icon:"🍽️",color:"#84CC16"},
+  {q:"What if your Aadhaar details are wrong?",a:"You can update Aadhaar at any Aadhaar centre or online at myaadhaar.uidai.gov.in. Denial of services due to Aadhaar error can be raised with UIDAI.",icon:"🆔",color:"#06B6D4"},
+  {q:"Is peaceful protest / strike a legal right?",a:"YES! Peaceful strike is a Fundamental Right (Article 19). Workers on legal strike cannot be dismissed just for striking. But pay for strike days can be withheld.",icon:"✊",color:"#F97316"},
+];
+
+// App State
+let currentScreen='home';
+let selectedCat='all';
+let selectedLaw=null;
+let searchVal='';
+let quizIndex=0;
+let quizRevealed=false;
+</script>
+
+<!-- ═══════════════════════════════════════════════
+     APP SHELL
+════════════════════════════════════════════════ -->
+
+<!-- HOME SCREEN -->
+<div id="screen-home" class="screen">
+  <div id="appbar">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+      <div>
+        <div style="font-size:20px;font-weight:900;letter-spacing:-.5px;">🇮🇳 <span style="color:#FF6B35;">Mera</span> Adhikar</div>
+        <div id="topic-count" style="font-size:10px;color:rgba(255,255,255,.4);letter-spacing:1px;">मेरा अधिकार • 24 topics</div>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <div class="tap" onclick="showScreen('quiz')" style="background:rgba(108,99,255,.2);border:1px solid rgba(108,99,255,.4);border-radius:10px;padding:6px 10px;font-size:11px;font-weight:700;color:#A78BFA;">🧠 Quiz</div>
+        <div class="tap" onclick="showScreen('helplines')" style="background:rgba(239,68,68,.2);border:1px solid rgba(239,68,68,.4);border-radius:10px;padding:6px 10px;font-size:11px;font-weight:700;color:#FCA5A5;">📞 Help</div>
+      </div>
+    </div>
+    <div id="search-wrap">
+      <span style="font-size:16px;opacity:.5;">🔍</span>
+      <input id="search-input" class="search-input" placeholder="Search rights, laws, situations..." oninput="onSearch(this.value)"/>
+      <span id="search-clear" class="tap hidden" onclick="clearSearch()" style="opacity:.5;font-size:16px;">✕</span>
+    </div>
+  </div>
+
+  <div id="cat-scroll"></div>
+
+  <!-- Hero Banner -->
+  <div id="hero-banner" style="margin:14px 16px 0;background:linear-gradient(135deg,rgba(255,107,53,.15),rgba(108,99,255,.15));border-radius:18px;padding:18px;border:1px solid rgba(255,107,53,.25);position:relative;overflow:hidden;">
+    <div style="position:absolute;right:-10px;top:-10px;font-size:80px;opacity:.06;">⚖️</div>
+    <div style="font-size:15px;font-weight:900;margin-bottom:6px;">Know your rights. Protect yourself. 🇮🇳</div>
+    <div style="font-size:12px;color:rgba(255,255,255,.6);line-height:1.6;">24 real laws • 12 emergency helplines • Real Indian scenarios with action steps</div>
+    <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;">
+      <div class="tap chip" onclick="filterQuick('family')" style="background:rgba(255,255,255,.1);border-radius:8px;padding:5px 10px;font-size:11px;font-weight:700;border:1px solid rgba(255,255,255,.15);">Family →</div>
+      <div class="tap chip" onclick="filterQuick('police')" style="background:rgba(255,255,255,.1);border-radius:8px;padding:5px 10px;font-size:11px;font-weight:700;border:1px solid rgba(255,255,255,.15);">Police →</div>
+      <div class="tap chip" onclick="filterQuick('land')" style="background:rgba(255,255,255,.1);border-radius:8px;padding:5px 10px;font-size:11px;font-weight:700;border:1px solid rgba(255,255,255,.15);">Land →</div>
+      <div class="tap chip" onclick="filterQuick('cyber')" style="background:rgba(255,255,255,.1);border-radius:8px;padding:5px 10px;font-size:11px;font-weight:700;border:1px solid rgba(255,255,255,.15);">Online Fraud →</div>
+    </div>
+  </div>
+
+  <div style="padding:14px 16px 8px;display:flex;justify-content:space-between;align-items:center;">
+    <div id="section-label" style="font-size:13px;font-weight:800;color:rgba(255,255,255,.5);">🏠 ALL TOPICS • 24 topics</div>
+  </div>
+
+  <div id="law-cards" style="padding:0 16px;display:flex;flex-direction:column;gap:10px;"></div>
+</div>
+
+<!-- DETAIL SCREEN -->
+<div id="screen-detail" class="screen hidden fade"></div>
+
+<!-- HELPLINES SCREEN -->
+<div id="screen-helplines" class="screen hidden fade">
+  <div style="background:linear-gradient(160deg,rgba(255,107,53,.2) 0%,#0D0D0D 70%);padding:56px 20px 24px;">
+    <div class="tap" onclick="showScreen('home')" style="color:rgba(255,255,255,.6);font-size:13px;margin-bottom:16px;display:inline-block;">← Back</div>
+    <div style="font-size:22px;font-weight:900;">📞 Emergency Helplines</div>
+    <div style="font-size:13px;color:rgba(255,255,255,.6);margin-top:4px;">All numbers FREE to call · 24/7 · Any phone</div>
+  </div>
+  <div style="padding:4px 16px 0;">
+    <div style="background:rgba(255,107,53,.15);border:1px solid rgba(255,107,53,.35);border-radius:14px;padding:14px;margin-bottom:16px;">
+      <span class="ping" style="display:inline-block;font-size:14px;margin-right:6px;">🔴</span>
+      <span style="font-size:13px;font-weight:700;">Cyber fraud? Call 1930 within 3 hours for best recovery chance!</span>
+    </div>
+    <div id="helpline-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"></div>
+    <div style="font-size:13px;font-weight:800;color:#FF6B35;margin:20px 0 10px;">🌐 File Complaints Online</div>
+    <div id="websites-list"></div>
+  </div>
+</div>
+
+<!-- QUIZ SCREEN -->
+<div id="screen-quiz" class="screen hidden fade">
+  <div style="background:linear-gradient(160deg,rgba(108,99,255,.2) 0%,#0D0D0D 70%);padding:56px 20px 24px;">
+    <div class="tap" onclick="showScreen('home')" style="color:rgba(255,255,255,.6);font-size:13px;margin-bottom:16px;display:inline-block;">← Back</div>
+    <div style="font-size:22px;font-weight:900;">🧠 Did You Know?</div>
+    <div id="quiz-counter" style="font-size:13px;color:rgba(255,255,255,.6);margin-top:4px;">1 of 8 facts</div>
+    <div style="height:4px;background:rgba(255,255,255,.1);border-radius:2px;margin-top:12px;">
+      <div id="quiz-progress" style="height:100%;border-radius:2px;background:#6C63FF;width:12.5%;transition:width .3s;"></div>
+    </div>
+  </div>
+  <div style="padding:16px;" id="quiz-content"></div>
+</div>
+
+<!-- Bottom Nav -->
+<div id="bottom-nav">
+  <div class="nav-item tap" onclick="showScreen('home')" id="nav-home">
+    <div class="nav-icon">🏠</div>
+    <div class="nav-label" style="color:#FF6B35;">Home</div>
+    <div class="nav-dot"></div>
+  </div>
+  <div class="nav-item tap" onclick="showScreen('helplines')" id="nav-helplines">
+    <div class="nav-icon">📞</div>
+    <div class="nav-label" style="color:rgba(255,255,255,.4);">Helplines</div>
+  </div>
+  <div class="nav-item tap" onclick="showScreen('quiz')" id="nav-quiz">
+    <div class="nav-icon">🧠</div>
+    <div class="nav-label" style="color:rgba(255,255,255,.4);">Did You Know</div>
+  </div>
+</div>
+
+<!-- Emergency Bar -->
+<div id="emergency-bar" onclick="window.location='tel:112'">
+  <span class="ping" style="font-size:12px;">🔴</span>
+  <span style="font-size:12px;font-weight:800;color:#fff;">EMERGENCY: 112</span>
+  <span style="font-size:12px;font-weight:800;color:#fff;">| CYBER: 1930</span>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════════ -->
+<script>
+
+// ── RENDER CATEGORIES ──────────────────────────────
+function renderCategories(){
+  const el=document.getElementById('cat-scroll');
+  el.innerHTML=CATEGORIES.map(c=>`
+    <div class="chip tap" id="cat-${c.id}" onclick="selectCat('${c.id}')" style="
+      padding:7px 14px;border-radius:20px;
+      background:${selectedCat===c.id?c.color:'rgba(255,255,255,.07)'};
+      color:${selectedCat===c.id?'#000':'rgba(255,255,255,.7)'};
+      font-size:12px;font-weight:800;
+      border:${selectedCat===c.id?'none':'1px solid rgba(255,255,255,.1)'};
+    ">${c.icon} ${c.label}</div>
+  `).join('');
+}
+
+// ── RENDER LAW CARDS ───────────────────────────────
+function getFiltered(){
+  return ALL_LAWS.filter(l=>{
+    const mc=selectedCat==='all'||l.cat===selectedCat;
+    const ms=!searchVal||
+      l.title.toLowerCase().includes(searchVal)||
+      l.summary.toLowerCase().includes(searchVal)||
+      l.scenario.tag.toLowerCase().includes(searchVal)||
+      l.badge.toLowerCase().includes(searchVal);
+    return mc&&ms;
+  });
+}
+
+function renderCards(){
+  const laws=getFiltered();
+  const el=document.getElementById('law-cards');
+  const label=document.getElementById('section-label');
+  const cat=CATEGORIES.find(c=>c.id===selectedCat);
+  label.innerHTML=`${cat.icon} ${cat.label.toUpperCase()} • ${laws.length} topics`;
+  document.getElementById('topic-count').textContent=`मेरा अधिकार • ${laws.length} topics`;
+  document.getElementById('hero-banner').style.display=selectedCat==='all'&&!searchVal?'block':'none';
+
+  if(laws.length===0){
+    el.innerHTML=`<div style="text-align:center;padding:40px 0;color:rgba(255,255,255,.3);font-size:14px;">No results found. Try a different keyword.</div>`;
+    return;
+  }
+  el.innerHTML=laws.map(law=>`
+    <div class="card tap" onclick="openLaw(${law.id})" style="
+      background:rgba(255,255,255,.04);border-radius:18px;padding:16px;
+      border:1px solid rgba(255,255,255,.08);border-left:4px solid ${law.color};
+    ">
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <div style="width:44px;height:44px;border-radius:13px;flex-shrink:0;
+          background:${law.color}1A;border:1.5px solid ${law.color}44;
+          display:flex;align-items:center;justify-content:center;font-size:20px;">${law.icon}</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:15px;font-weight:900;color:#fff;margin-bottom:3px;">${law.title}</div>
+          <div style="font-size:11px;color:${law.color};font-weight:700;margin-bottom:6px;">${law.article}</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.65);line-height:1.5;
+            display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${law.summary}</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;">
+            <div style="background:${law.color}22;border:1px solid ${law.color}44;
+              border-radius:7px;padding:3px 9px;font-size:10px;font-weight:800;color:${law.color};">${law.badge}</div>
+            <div style="font-size:11px;color:rgba(255,255,255,.3);font-weight:600;">Tap for example →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── DETAIL SCREEN ──────────────────────────────────
+function openLaw(id){
+  selectedLaw=ALL_LAWS.find(l=>l.id===id);
+  renderDetail();
+  showScreen('detail');
+  document.getElementById('screen-detail').scrollTop=0;
+}
+
+function renderDetail(){
+  const law=selectedLaw;
+  const el=document.getElementById('screen-detail');
+  el.innerHTML=`
+    <div style="background:linear-gradient(160deg,${law.color}33 0%,#0D0D0D 100%);padding:56px 20px 24px;border-bottom:1px solid ${law.color}33;">
+      <div class="tap" onclick="showScreen('home')" style="display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,.6);font-size:13px;margin-bottom:20px;">← Back</div>
+      <div style="display:flex;align-items:flex-start;gap:14px;">
+        <div style="width:56px;height:56px;border-radius:16px;flex-shrink:0;
+          background:${law.color}22;border:2px solid ${law.color}55;
+          display:flex;align-items:center;justify-content:center;font-size:26px;">${law.icon}</div>
+        <div>
+          <div style="background:${law.color};color:#000;font-size:10px;font-weight:800;border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:6px;letter-spacing:.5px;">${law.badge.toUpperCase()}</div>
+          <div style="font-size:20px;font-weight:900;line-height:1.25;">${law.title}</div>
+          <div style="font-size:12px;color:${law.color};font-weight:700;margin-top:3px;">${law.article}</div>
+        </div>
+      </div>
+      <div style="margin-top:16px;font-size:14px;color:rgba(255,255,255,.75);line-height:1.65;background:rgba(255,255,255,.05);border-radius:12px;padding:14px;">${law.summary}</div>
+    </div>
+
+    <div style="padding:20px 16px;">
+      ${sectionLabel(law.color,'🎭 REAL LIFE SCENARIO')}
+      <div style="background:${law.color}11;border-radius:16px;padding:16px;border:1px solid ${law.color}33;margin-bottom:20px;">
+        <div style="font-size:13px;font-weight:800;color:${law.color};margin-bottom:10px;">${law.scenario.tag}</div>
+        <div style="background:rgba(0,0,0,.3);border-radius:10px;padding:12px;margin-bottom:10px;">
+          <span style="color:#FCD34D;font-weight:800;font-size:12px;">SITUATION  </span>
+          <span style="font-size:13px;color:rgba(255,255,255,.85);line-height:1.6;">${law.scenario.story}</span>
+        </div>
+        <div style="background:rgba(0,0,0,.3);border-radius:10px;padding:12px;">
+          <span style="color:#4ADE80;font-weight:800;font-size:12px;">YOUR RIGHT  </span>
+          <span style="font-size:13px;color:rgba(255,255,255,.85);line-height:1.6;">${law.scenario.law}</span>
+        </div>
+      </div>
+
+      ${sectionLabel(law.color,'👣 WHAT TO DO — STEP BY STEP')}
+      <div style="margin-bottom:20px;">
+        ${law.scenario.steps.map((s,i)=>`
+          <div style="display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:12px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);">
+            <div style="width:26px;height:26px;border-radius:8px;flex-shrink:0;background:${law.color};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#000;">${i+1}</div>
+            <div style="font-size:13px;line-height:1.55;color:rgba(255,255,255,.88);flex:1;">${s}</div>
+          </div>
+        `).join('')}
+      </div>
+
+      ${sectionLabel(law.color,'✅ KEY FACTS')}
+      <div style="background:rgba(255,255,255,.04);border-radius:16px;padding:16px;border:1px solid rgba(255,255,255,.08);margin-bottom:20px;">
+        ${law.keyFacts.map((f,i)=>`
+          <div style="display:flex;gap:10px;align-items:flex-start;
+            ${i<law.keyFacts.length-1?'padding-bottom:10px;margin-bottom:10px;border-bottom:1px solid rgba(255,255,255,.07);':''}">
+            <span style="color:${law.color};font-size:16px;flex-shrink:0;">•</span>
+            <span style="font-size:13px;line-height:1.55;color:rgba(255,255,255,.8);">${f}</span>
+          </div>
+        `).join('')}
+      </div>
+
+      <div style="background:linear-gradient(135deg,rgba(74,222,128,.15),rgba(74,222,128,.05));border:1px solid rgba(74,222,128,.3);border-radius:16px;padding:16px;margin-bottom:20px;">
+        <div style="font-size:12px;color:#4ADE80;font-weight:800;margin-bottom:6px;">🏆 REAL OUTCOME</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.85);line-height:1.6;">${law.scenario.outcome}</div>
+      </div>
+
+      <div class="tap" onclick="showScreen('home')" style="width:100%;padding:14px;background:linear-gradient(135deg,${law.color},${law.color}88);border:none;border-radius:14px;color:#000;font-size:15px;font-weight:800;text-align:center;cursor:pointer;">
+        ✊ I Know My Rights!
+      </div>
+    </div>
+  `;
+}
+
+function sectionLabel(color,label){
+  return `<div style="font-size:11px;font-weight:900;color:${color};letter-spacing:1px;margin-bottom:10px;display:flex;align-items:center;gap:6px;">
+    <div style="height:2px;width:20px;background:${color};border-radius:1px;"></div>
+    ${label}
+    <div style="height:2px;flex:1;background:${color}33;border-radius:1px;"></div>
+  </div>`;
+}
+
+// ── HELPLINES SCREEN ───────────────────────────────
+function renderHelplines(){
+  const grid=document.getElementById('helpline-grid');
+  grid.innerHTML=HELPLINES.map(h=>`
+    <div class="tap card" onclick="window.location='tel:${h.num}'" style="
+      background:${h.color}11;border:1px solid ${h.color}33;
+      border-radius:16px;padding:14px 12px;text-align:center;">
+      <div style="font-size:28px;margin-bottom:6px;">${h.icon}</div>
+      <div style="font-size:12px;font-weight:800;color:#fff;margin-bottom:2px;">${h.name}</div>
+      <div style="font-size:18px;font-weight:900;color:${h.color};letter-spacing:.5px;">${h.num}</div>
+      <div style="font-size:10px;color:rgba(255,255,255,.5);margin-top:4px;">${h.desc}</div>
+      <div style="margin-top:10px;background:${h.color};border-radius:8px;padding:5px 0;font-size:11px;font-weight:800;color:#000;">TAP TO CALL</div>
+    </div>
+  `).join('');
+
+  const websites=[
+    {name:"RTI Online (Central Govt)",url:"rtionline.gov.in",icon:"📋"},
+    {name:"Cyber Crime Report",url:"cybercrime.gov.in",icon:"💻"},
+    {name:"Consumer Helpline",url:"consumerhelpline.gov.in",icon:"🛒"},
+    {name:"RERA Maharashtra",url:"maharera.mahaonline.gov.in",icon:"🏢"},
+    {name:"RERA Telangana",url:"rera.telangana.gov.in",icon:"🏢"},
+    {name:"National Legal Services",url:"nalsa.gov.in",icon:"⚖️"},
+    {name:"NHRC Human Rights",url:"nhrc.nic.in",icon:"🛡️"},
+    {name:"FSSAI Food Complaint",url:"foscos.fssai.gov.in",icon:"🍽️"},
+    {name:"Aadhaar Update",url:"myaadhaar.uidai.gov.in",icon:"🆔"},
+    {name:"EPFO PF Grievance",url:"epfindia.gov.in",icon:"💼"},
+  ];
+  const wl=document.getElementById('websites-list');
+  wl.innerHTML=websites.map((s,i)=>`
+    <div style="display:flex;align-items:center;gap:12px;padding:11px 0;
+      ${i<websites.length-1?'border-bottom:1px solid rgba(255,255,255,.07);':''}">
+      <span style="font-size:18px;">${s.icon}</span>
+      <div style="flex:1;">
+        <div style="font-size:13px;font-weight:700;">${s.name}</div>
+        <div style="font-size:11px;color:#06B6D4;">${s.url}</div>
+      </div>
+      <span style="font-size:14px;opacity:.4;">→</span>
+    </div>
+  `).join('');
+}
+
+// ── QUIZ SCREEN ────────────────────────────────────
+function renderQuiz(){
+  const q=DID_YOU_KNOW[quizIndex];
+  document.getElementById('quiz-counter').textContent=`${quizIndex+1} of ${DID_YOU_KNOW.length} facts`;
+  document.getElementById('quiz-progress').style.width=`${((quizIndex+1)/DID_YOU_KNOW.length)*100}%`;
+
+  const el=document.getElementById('quiz-content');
+  el.innerHTML=`
+    <div class="slide-up">
+      <div style="background:${q.color}11;border:1px solid ${q.color}33;border-radius:20px;padding:24px;margin-bottom:16px;min-height:220px;">
+        <div style="font-size:40px;margin-bottom:16px;text-align:center;">${q.icon}</div>
+        <div style="font-size:17px;font-weight:800;color:#fff;line-height:1.4;margin-bottom:20px;text-align:center;">${q.q}</div>
+        ${quizRevealed
+          ? `<div class="slide-up" style="background:rgba(0,0,0,.4);border-radius:12px;padding:14px;font-size:14px;color:rgba(255,255,255,.88);line-height:1.65;">
+              ✅ <strong style="color:${q.color}">Answer: </strong>${q.a}
+            </div>`
+          : `<div class="tap" onclick="revealQuiz()" style="background:${q.color};border-radius:14px;padding:14px;text-align:center;font-size:15px;font-weight:800;color:#000;cursor:pointer;">Reveal Answer 👇</div>`
+        }
+      </div>
+      <div style="display:flex;gap:10px;margin-bottom:20px;">
+        <div class="tap" onclick="prevQuiz()" style="flex:1;background:rgba(255,255,255,.08);border-radius:14px;padding:14px;text-align:center;font-size:14px;font-weight:700;opacity:${quizIndex===0?.3:1};cursor:pointer;">← Prev</div>
+        <div class="tap" onclick="nextQuiz()" style="flex:1;background:#6C63FF;border-radius:14px;padding:14px;text-align:center;font-size:14px;font-weight:700;color:#fff;opacity:${quizIndex===DID_YOU_KNOW.length-1?.3:1};cursor:pointer;">Next →</div>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:800;color:rgba(255,255,255,.5);margin-bottom:10px;">All Facts</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          ${DID_YOU_KNOW.map((_,i)=>`
+            <div class="tap" onclick="goQuiz(${i})" style="
+              width:36px;height:36px;border-radius:10px;
+              background:${i===quizIndex?'#6C63FF':i<quizIndex?'rgba(108,99,255,.3)':'rgba(255,255,255,.07)'};
+              display:flex;align-items:center;justify-content:center;
+              font-size:13px;font-weight:800;cursor:pointer;
+              border:${i===quizIndex?'2px solid #6C63FF':'1px solid rgba(255,255,255,.1)'};">${i+1}</div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ── NAVIGATION ─────────────────────────────────────
+function showScreen(name){
+  ['home','detail','helplines','quiz'].forEach(s=>{
+    document.getElementById('screen-'+s).classList.add('hidden');
+  });
+  document.getElementById('screen-'+name).classList.remove('hidden');
+  currentScreen=name;
+
+  // Update bottom nav
+  ['home','helplines','quiz'].forEach(n=>{
+    const el=document.getElementById('nav-'+n);
+    if(!el) return;
+    const label=el.querySelector('.nav-label');
+    const dot=el.querySelector('.nav-dot');
+    if(n===name){
+      label.style.color='#FF6B35';
+      if(!dot){const d=document.createElement('div');d.className='nav-dot';el.appendChild(d);}
+    } else {
+      label.style.color='rgba(255,255,255,.4)';
+      if(dot) dot.remove();
+    }
+  });
+
+  if(name==='helplines') renderHelplines();
+  if(name==='quiz'){ quizIndex=0; quizRevealed=false; renderQuiz(); }
+  window.scrollTo(0,0);
+}
+
+// ── INTERACTIONS ───────────────────────────────────
+function selectCat(id){
+  selectedCat=id;
+  renderCategories();
+  renderCards();
+}
+
+function filterQuick(id){
+  selectedCat=id;
+  renderCategories();
+  renderCards();
+}
+
+function onSearch(val){
+  searchVal=val.toLowerCase();
+  document.getElementById('search-clear').classList.toggle('hidden',!val);
+  renderCards();
+}
+
+function clearSearch(){
+  searchVal='';
+  document.getElementById('search-input').value='';
+  document.getElementById('search-clear').classList.add('hidden');
+  renderCards();
+}
+
+function revealQuiz(){ quizRevealed=true; renderQuiz(); }
+function nextQuiz(){ if(quizIndex<DID_YOU_KNOW.length-1){quizIndex++;quizRevealed=false;renderQuiz();} }
+function prevQuiz(){ if(quizIndex>0){quizIndex--;quizRevealed=false;renderQuiz();} }
+function goQuiz(i){ quizIndex=i; quizRevealed=false; renderQuiz(); }
+
+// ── INIT ───────────────────────────────────────────
+renderCategories();
+renderCards();
+</script>
+</body>
+</html>
