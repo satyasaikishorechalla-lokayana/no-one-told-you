@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.lokayanalegaltech.noonetoldyou",
+    "sha256_cert_fingerprints": ["55:85:CA:94:71:51:22:26:00:CD:6E:12:9A:B5:23:4C:BD:35:0A:90:DB:DD:3E:34:93:74:38:8D:64:EE:6C:8D"]
+  }
+}]
